@@ -130,4 +130,3 @@ def run_agent(task):
 
 if __name__ == "__main__":
     run_agent("Кіт дряпає меблі, що робити?")
-

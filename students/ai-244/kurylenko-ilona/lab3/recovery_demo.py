@@ -1,29 +1,27 @@
-
-"""Окремий тест виправлення помилки агента."""
+"""Демонстрація самовиправлення агента без підказування помилки."""
 
 from langfuse import get_client, propagate_attributes
 
 from agent import run_agent
 
-question = (
-    "Потрібно дізнатися вік першого комплексного щеплення "
-    "та його ціну за допомогою інструмента vaccine_info. "
-    "Для перевірки обробки помилок спочатку виклич vaccine_info "
-    "з аргументом vaccine='комплексне щеплення'. "
-    "Якщо інструмент поверне помилку і список допустимих назв, "
-    "не завершуй відповідь і не проси користувача уточнювати назву. "
-    "Знайди у списку назву 'комплексне', повторно виклич vaccine_info "
-    "з виправленим аргументом vaccine='комплексне' "
-    "і лише після успішного результату дай відповідь про вік і ціну."
-)
 
-with propagate_attributes(
-    trace_name="recovery-demo",
-    tags=["recovery-demo"],
-):
-    result = run_agent(question)
+questions = [
+    "Скільки коштує щеплення проти сказу і коли його вперше роблять?",
+    "Скільки корму треба коту вагою 4500 грамів на 2 тижні?",
+]
+
+
+for index, question in enumerate(questions, start=1):
+    print(f"\n{'=' * 60}")
+    print(f"СЦЕНАРІЙ {index}: {question}")
+
+    with propagate_attributes(
+        trace_name=f"recovery-{index}",
+        tags=["recovery"]
+    ):
+        result = run_agent(question)
+
+    print(f"\nРезультат сценарію {index}: {result}")
+
 
 get_client().flush()
-
-print("\nРезультат тесту:", result)
-

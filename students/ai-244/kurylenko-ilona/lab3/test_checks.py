@@ -1,8 +1,6 @@
-
 """Перевірка ланцюжка перевірок диспетчера."""
 
 from dispatcher import call_tool
-
 
 cases = [
     # Успішний виклик
@@ -30,11 +28,11 @@ cases = [
     ("vaccine_info", '{"vaccine": "комплексне щеплення"}'),
 
     # 8. Значення поза межами
-    ("calc_food", '{"weight_kg": -5, "grams_per_kg": 25, "days": 30}'),
+    ("calc_food", '{"weight_kg": 45, "grams_per_kg": 25, "days": 14}'),
 ]
 
-
 for name, raw in cases:
-    level, text = call_tool(name, raw)
-    print(f"{level:10} | {text}\n")
-
+    level, result = call_tool(name, raw)
+    print(f"{name}: {level}")
+    print(f"Виклик: {name}({raw})")
+    print(f"Повідомлення: {result}\n")

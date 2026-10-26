@@ -1,4 +1,3 @@
-
 """Класи аргументів інструментів."""
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -28,21 +27,25 @@ class CalcFoodArgs(BaseModel):
 
     weight_kg: float = Field(
         gt=0,
-        le=100,
-        description="Вага кота в кілограмах, більше 0"
+        le=20,
+        description="Вага кота в кілограмах, більше 0 "
+                    "і не більше 20. Якщо вага вказана "
+                    "у грамах, переведи її у кілограми"
     )
 
     grams_per_kg: float = Field(
         gt=0,
         le=1000,
-        description="Норма корму в грамах на кілограм ваги за день. "
-                    "Якщо користувач не вказав норму, передай 25"
+        description="Норма корму в грамах на кілограм "
+                    "ваги за день. Якщо користувач "
+                    "не вказав норму, передай 25"
     )
 
     days: float = Field(
         gt=0,
         le=365,
-        description="Кількість днів, на які розраховується корм"
+        description="Кількість днів, на які "
+                    "розраховується корм"
     )
 
 
@@ -51,4 +54,3 @@ ARGS = {
     "vaccine_info": VaccineInfoArgs,
     "calc_food": CalcFoodArgs,
 }
-

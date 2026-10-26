@@ -25,5 +25,3 @@ MAX_RETRIES = 2
 ALLOWED = ["search_articles", "vaccine_info", "calc_food"]
 
 RUN_TAG = "checks"
-
-
